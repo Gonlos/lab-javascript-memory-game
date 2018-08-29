@@ -44,7 +44,7 @@ $(document).ready(function(){
   // Add all the div's to the HTML
 
   // Bind the click event of each element to a function
-  $('.back').click(function (event) {
+  $('#memory_board').on('click','.back:first-child',function (event) {
     if(memoryGame.pickedCards.length<2){
       memoryGame.pickedCards.push($(this))
       $(this).toggleClass("front back").next().toggleClass("front back")
