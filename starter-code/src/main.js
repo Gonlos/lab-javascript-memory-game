@@ -30,7 +30,7 @@ function flipCard(name){
 function resetBoard(cards){
   var html = '';
   cards.forEach(function (pic) {
-    html += '<div class="card" data-card-name="'+ pic.name +'">';
+    html += '<div class="card back-card" data-card-name="'+ pic.name +'">';
     html += '  <div class="back" name="'+ pic.img +'"></div>';
     html += '  <div class="front" style="background: url(img/'+ pic.img +') no-repeat"></div>';
     html += '</div>';
@@ -47,6 +47,7 @@ $(document).ready(function(){
   $('#memory_board').on('click','.back:first-child',function (event) {
     if(memoryGame.pickedCards.length<2){
       memoryGame.pickedCards.push($(this))
+      $(this).parent().toggleClass("back-card front-card ")
       $(this).toggleClass("front back").next().toggleClass("front back")
     }else{
       return
@@ -64,10 +65,12 @@ $(document).ready(function(){
         }
       }else{
         setTimeout(function(){
+          memoryGame.pickedCards[0].parent().toggleClass("back-card front-card");
+          memoryGame.pickedCards[1].parent().toggleClass("back-card front-card");
           memoryGame.pickedCards[0].toggleClass("back front").next().toggleClass("back front")
           memoryGame.pickedCards[1].toggleClass("back front").next().toggleClass("back front")
           memoryGame.pickedCards=[]
-        },1000)
+        },2000)
 
       }
     }
